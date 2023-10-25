@@ -18,4 +18,26 @@ namespace Tuong.Models
     
         public int? secondPlayerId { get; set; }
     }
+
+    [Serializable]
+    public class RoomList
+    {
+        public List<Room> rooms { get; set; }
+    }
+    
+    [Serializable]
+    public class Questions
+    {
+        public string id;
+        public string question;
+        public string answer1;
+        public string answer2;
+    }
+
+    [Serializable]
+    public class QuestionList
+    {
+        public List<Questions> list;
+    }
+
 }

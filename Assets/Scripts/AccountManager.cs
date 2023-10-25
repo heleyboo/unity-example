@@ -63,7 +63,7 @@ namespace Tuong
             string jsonData = JsonSerializer.Serialize<UpdateGameUser>(gameUserUpdate);
             
             // Create a POST request
-            UnityWebRequest webRequest = new UnityWebRequest(apiUrl + "/" + SystemInfo.deviceUniqueIdentifier, "POST");
+            UnityWebRequest webRequest = new UnityWebRequest(apiUrl + "/" + GameHolder.GameUser.deviceId, "POST");
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
             webRequest.uploadHandler = new UploadHandlerRaw(bodyRaw);
             webRequest.downloadHandler = new DownloadHandlerBuffer();
@@ -87,6 +87,7 @@ namespace Tuong
                 string responseText = webRequest.downloadHandler.text;
 
                 GameUser? gameUserRes = JsonSerializer.Deserialize<GameUser>(responseText);
+                GameHolder.GameUser = gameUserRes;
 
                 if (gameUserRes != null && !String.IsNullOrEmpty(gameUserRes.username))
                 {

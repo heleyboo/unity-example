@@ -15,7 +15,9 @@ namespace Tuong.Models
         
         public static GameUser CreateFromDeviceId([CanBeNull] string username)
         {
-            return new GameUser() { deviceId = SystemInfo.deviceUniqueIdentifier, username = username};
+            Guid myuuid = Guid.NewGuid();
+            string myuuidAsString = myuuid.ToString();
+            return new GameUser() { deviceId = myuuidAsString, username = username};
         }
     }
 }

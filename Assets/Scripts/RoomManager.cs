@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Text.Json;
+using Newtonsoft.Json;
 using Tuong.Models;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Tuong
 {
@@ -70,8 +71,14 @@ namespace Tuong
             if (webRequest.result == UnityWebRequest.Result.Success)
             {
                 string responseText = webRequest.downloadHandler.text;
-                Rooms = JsonSerializer.Deserialize<List<Room>>(responseText);
-                Debug.Log("Response: " + Rooms.Count);
+                // Rooms = JsonSerializer.Deserialize<List<Room>>(responseText);
+                RoomList roomList = new RoomList() { rooms = new List<Room>() };
+                // Convert downloadHandler.text to a JSON string
+                string jsonData = JsonConvert.SerializeObject(responseText);
+                // Deserialize the JSON string if needed
+                var s = JsonConvert.DeserializeObject<RoomList>(responseText);
+                Rooms = s.rooms;
+                Debug.Log("Response: " + roomList);
                 ShowListRooms();
                 // Parse and process the response data here
             }
