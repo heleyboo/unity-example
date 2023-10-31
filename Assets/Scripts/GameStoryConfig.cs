@@ -6,20 +6,10 @@ namespace Tuong
 {
     public class GameStoryConfig: MonoBehaviour
     {
-        public static List<IStory> Categories { get; set; }
+        public static List<IStory> StoryItems { get; set; }
 
-        public static Category SelectedCategory { get; set; }
+        public static IStory SelectedCategory { get; set; }
         
-        public static Chapter SelectedChapter { get; set; }
-
-        public GameStoryConfig()
-        {
-            Categories = new List<IStory>();
-
-            for (int i = 0; i < 5; i++)
-            {
-                Categories.Add(new Category() { Name = Faker.Name.FullName(), Description = Faker.Lorem.Sentence()});
-            }
-        }
+        public static IStory SelectedChapter { get; set; }
     }
 }

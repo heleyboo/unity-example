@@ -6,11 +6,11 @@ namespace Tuong.Models
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        private List<Difficulty> Difficulties { get; set; }
+        public List<IStory> Difficulties { get; set; }
 
         public Chapter()
         {
-            Difficulties = new List<Difficulty>();
+            Difficulties = new List<IStory>();
             for (int i = 0; i < 5; i++)
             {
                 Difficulties.Add(new Difficulty() { Name = Faker.Name.FullName(), Description = Faker.Lorem.Sentence()});
