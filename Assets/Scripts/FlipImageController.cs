@@ -19,6 +19,7 @@ namespace Tuong
         [SerializeField] protected Transform newGamePanel;
         [SerializeField] protected Text txtNewGame;
         [SerializeField] protected Button btnNewGame;
+        [SerializeField] protected Button btnNewGameTop;
         public List<int> Board { get; set; }
         
         public List<Transform> Items { get; set; }
@@ -76,6 +77,7 @@ namespace Tuong
 
         public void Awake()
         {
+            btnNewGameTop.onClick.AddListener(() => NewGame());
             NewGame();
         }
 
@@ -106,7 +108,8 @@ namespace Tuong
                 
                 int index = i;
 
-                entryTransform.GetComponent<Button>().onClick.AddListener(() => HandleClick(index));
+                // entryTransform.GetComponent<Button>().onClick.AddListener(() => HandleClick(index));
+                entryTransform.GetComponent<Button>().onClick.AddListener(() => clickHandler.OnButtonClick(index));
                 
                 
                 // Assuming you have a reference to the sprite you want to set
@@ -209,5 +212,14 @@ namespace Tuong
             }
         }
         
+        private ClickHandler clickHandler;
+        private void Start()
+        {
+            // Create an instance of ClickHandler
+            clickHandler = new ClickHandler();
+
+            // Subscribe the HandleButtonClick method to the delegate
+            ClickHandler.ButtonClickDelegate += HandleClick;
+        }
     }
 }
